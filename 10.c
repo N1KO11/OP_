@@ -1,42 +1,33 @@
 #include <stdio.h>
+#include <math.h>
 int summa(int n)
 {
     if (n<10) return n;
     return summa(n/10) + n % 10;
 }
-void space(char* line, int begin, int end)
-{
-    if (begin == end)
-        return;
-    if (begin == 0 && line[begin] == ' ') {
-        for (int i = begin; i < end; ++i) {
-            line[i] = line[i + 1];
+int NOD(int a, int b){
+    while (a != b){
+        if (a > b){
+            a -= b;
+        } else {
+            b -= a;
         }
-        line[end] = ' ';
     }
-    if (line[begin] == ' ' && line[begin + 1] == ' ')
-    {
-        for (int i = begin; i < end; ++i) {
-            line[i] = line[i + 1];
-        }
-        line[end] = ' ';
-    }
+    return a;
+}
 
-    space(line, begin + 1, end);
+int NOK(int a, int b){
+    return abs(a * b) / NOD(a, b);
 }
 int main()
 {
     int sum;
     scanf("%d", &sum);
-    printf("%d", summa(sum));
+    printf("%d\n", summa(sum));
 
-    int space_;
-    scanf("%d", &space_);
-    char line[space_];
-    for (int i = 0; i <= space_; ++i) {
-        scanf("%c", &line[i]);
-    }
-    space(line, 0, space_);
-    printf("%s", line);
+    int a, b;
+    printf("Enter a and b: ");
+    scanf("%d %d", &a, &b);
+    printf("NOK = %d\nNOD = %d", NOK(a, b), NOD(a, b));
     return 0;
 }
